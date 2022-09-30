@@ -69,7 +69,7 @@ class EmployeeController {
 
         Employee e =  repository.findById(id)
                 .orElseThrow(() -> new EmployeeNotFoundException(id));
-        Overtime o = new Overtime(e.getId(),e.getName(),e.getOvertime());
+        Overtime o = new Overtime(e.getId(),e.getName(),e.calculateOverwork());
         return o;
     }
 
@@ -78,7 +78,7 @@ class EmployeeController {
         List<Overtime> overtimeList =  new ArrayList();
         List<Employee> eList = repository.findAll();
         for(Employee e : eList){
-            Overtime o = new Overtime(e.getId(),e.getName(),e.getOvertime());
+            Overtime o = new Overtime(e.getId(),e.getName(),e.calculateOverwork());
             overtimeList.add(o);
         }
         return overtimeList;

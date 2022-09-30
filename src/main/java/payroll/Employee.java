@@ -6,13 +6,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
+@ToString
 class Employee {
 
-    private @Id @GeneratedValue Long id;
-    private String name;
-    private String role;
-    private int workhours;
+    @Getter @Setter private @Id @GeneratedValue Long id;
+    @Getter @Setter private String name;
+    @Getter @Setter private String role;
+    @Getter @Setter private int workhours;
 
     Employee() {}
 
@@ -26,39 +31,7 @@ class Employee {
             this.workhours = 0;
     }
 
-    public Long getId() {
-        return this.id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public int getWorkhours() {
-        return this.workhours;
-    }
-
-    public String getRole() {
-        return this.role;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setWorkhours(int workhours) {
-        this.workhours = workhours;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public int getOvertime(){
+    public int calculateOverwork(){
         int overtime = this.workhours - 200;
         if(overtime >= 0){
             return overtime;
@@ -81,10 +54,5 @@ class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(this.id, this.name, this.role, this.workhours);
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" + "id=" + this.id + ", name='" + this.name + '\'' + ", role='" + this.role + '\''+ ", workhours='" + this.workhours + '\'' + '}';
     }
 }
